@@ -1,0 +1,28 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package objects;
+
+/**
+ *
+ * @author MysterBotz
+ */
+public class PlayerService {
+    
+    public static Player playerInstance;
+    
+    
+    public static void registerPlayer(Player player)
+    {
+        playerInstance = player;
+    }
+    
+    public static Player getRegPlayer()
+    {
+        return playerInstance;
+    }
+    
+    
+    
+}
