@@ -43,7 +43,7 @@ public class Game implements Runnable{
     @Override
     public void run() {
         
-        int fpsRate = 120;
+        int fpsRate = 60;
         int upsRate = 60;
         int fpsCount = 0;
         int upsCount = 0;
@@ -80,7 +80,10 @@ public class Game implements Runnable{
             {
                 deltaU--;
                 upsCount++;
-                player.update();
+                
+                float deltaTime = (float)(1.0 / upsRate);
+                
+                player.update(deltaTime);
             }
             
             if((System.currentTimeMillis() - lastCheck) >= 1000)

@@ -10,13 +10,13 @@ package objects;
  */
 public class RenderComponent {
     
-    public int posX;
-    public int posY;
-    public int width;
-    public int heigth;
+    public float posX;
+    public float posY;
+    public float width;
+    public float heigth;
     
     
-    public void updateComp(int posX, int posY, int width, int heigth)
+    public void updateComp(float posX, float posY, float width, float heigth)
     {
         this.posX = posX;
         this.posY = posY;

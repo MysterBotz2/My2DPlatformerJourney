@@ -32,11 +32,13 @@ public class KeyInput implements KeyListener{
         {
             case KeyEvent.VK_A -> this.player.setIsLeft(true);
             case KeyEvent.VK_D -> this.player.setIsRigth(true);
+            case KeyEvent.VK_SPACE -> this.player.jump();
         }
     }
 
     @Override
-    public void keyReleased(KeyEvent e) {
+    public void keyReleased(KeyEvent e) { 
+        
         switch(e.getKeyCode())
         {
             case KeyEvent.VK_A -> this.player.setIsLeft(false);

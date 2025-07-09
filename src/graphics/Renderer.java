@@ -50,7 +50,7 @@ public class Renderer extends JPanel{
         {
             if(ren != null)
             {
-                g2.drawRect(rc.posX, rc.posY, rc.width, rc.heigth);
+                g2.drawRect((int)rc.posX, (int)rc.posY, (int)rc.width, (int)rc.heigth);
             }
         }
         

@@ -10,12 +10,12 @@ package objects;
  */
 public abstract class Entity {
     
-    protected int posX;
-    protected int posY;
-    protected int width;
-    protected int heigth;
+    protected float posX;
+    protected float posY;
+    protected float width;
+    protected float heigth;
 
-    public Entity(int posX, int posY, int width, int heigth) {
+    public Entity(float posX, float posY, float width, float heigth) {
         this.posX = posX;
         this.posY = posY;
         this.width = width;
