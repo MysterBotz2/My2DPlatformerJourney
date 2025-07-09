@@ -6,8 +6,10 @@ package main;
 
 import graphics.Renderer;
 import inputs.KeyInput;
+import java.util.ArrayList;
+import java.util.List;
 import objects.Player;
-import objects.PlayerService;
+import objects.RenderComponent;
 
 /**
  *
@@ -17,21 +19,24 @@ public class Game implements Runnable{
     
      Window win;
      Renderer ren;
+
      
      Player player;
      KeyInput key;
     
     public Game(Window win)
     {
-        this.player = new Player();
-        PlayerService.registerPlayer(this.player);
-        this.key = new KeyInput(PlayerService.getRegPlayer());
+        this.player = new Player(100,100,100,100);
+        this.key = new KeyInput(this.player);
+
         
         this.win = win;
         this.ren = win.getRenderer();
-        this.ren.getKeyInput(key);
         
-        //Test PlayerService
+        this.win.addKeyListener(key);
+        this.win.setFocusable(true);
+        this.win.requestFocusInWindow();
+
         
     }
 
@@ -43,8 +48,8 @@ public class Game implements Runnable{
         int fpsCount = 0;
         int upsCount = 0;
 
-        double fps = 1000000000/fpsRate;
-        double ups = 1000000000/upsRate;
+        double nsPerFrame = 1000000000/fpsRate;
+        double nsPerUpdate = 1000000000/upsRate;
 
         long prevTime = System.nanoTime();
 
@@ -57,35 +62,48 @@ public class Game implements Runnable{
         {
             long currTime = System.nanoTime();
             
-            deltaF += (currTime - prevTime) / fps;
-            deltaU += (currTime - prevTime) / ups;
+            deltaF += (currTime - prevTime) / nsPerFrame;
+            deltaU += (currTime - prevTime) / nsPerUpdate;
             prevTime = currTime;
             
             if(deltaF >= 1)
             {
                 deltaF--;
                 fpsCount++;
-                ren.repaint();
+                List<RenderComponent> currRens = new ArrayList<>();
+                currRens.add(player.getRenderComp());
+                
+                ren.getRenderables(currRens);
             }
             
             if(deltaU >= 1)
             {
                 deltaU--;
                 upsCount++;
-                
+                player.update();
             }
             
             if((System.currentTimeMillis() - lastCheck) >= 1000)
             {
                 lastCheck = System.currentTimeMillis();
-                System.out.println("FPS: " + fpsCount + " | UPS: " + upsCount);
+                //System.out.println("FPS: " + fpsCount + " | UPS: " + upsCount);
+                player.displayPosition();
                 fpsCount = 0;
                 upsCount = 0;
+            }
+            
+             try {
+                long sleepTime = (long) (Math.min(nsPerFrame - deltaF * nsPerFrame, nsPerUpdate - deltaU * nsPerUpdate) / 1_000_000);
+                if (sleepTime > 0) {
+                    Thread.sleep(sleepTime);
+                }
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt(); // Restore interrupt status
             }
         }
         
     }
     
-    
+                
     
 }

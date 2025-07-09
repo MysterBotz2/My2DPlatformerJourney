@@ -28,12 +28,20 @@ public class KeyInput implements KeyListener{
 
     @Override
     public void keyPressed(KeyEvent e) {
-        
+        switch(e.getKeyCode())
+        {
+            case KeyEvent.VK_A -> this.player.setIsLeft(true);
+            case KeyEvent.VK_D -> this.player.setIsRigth(true);
+        }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        
+        switch(e.getKeyCode())
+        {
+            case KeyEvent.VK_A -> this.player.setIsLeft(false);
+            case KeyEvent.VK_D -> this.player.setIsRigth(false);
+        }
     }
     
 }

@@ -10,6 +10,8 @@ import inputs.KeyInput;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.util.List;
+import objects.RenderComponent;
 
 /**
  *
@@ -19,7 +21,8 @@ public class Renderer extends JPanel{
     
     private int scale = 3;
 
-    KeyInput key;
+
+    private List<RenderComponent> ren;
     
     public Renderer()
     {
@@ -28,9 +31,12 @@ public class Renderer extends JPanel{
         this.setFocusable(true);
     }
     
-    public void getKeyInput(KeyInput key)
+
+    
+    public void getRenderables(List<RenderComponent> ren)
     {
-        this.key = key;
+        this.ren = ren;
+        repaint();
     }
     
     @Override
@@ -40,6 +46,15 @@ public class Renderer extends JPanel{
         
         Graphics2D g2 = (Graphics2D)g;
         
+        for(RenderComponent rc : ren)
+        {
+            if(ren != null)
+            {
+                g2.drawRect(rc.posX, rc.posY, rc.width, rc.heigth);
+            }
+        }
+        
+        
     }
     
     public void setScale(int scale)
@@ -47,7 +62,7 @@ public class Renderer extends JPanel{
         this.scale = scale;
         this.setPreferredSize(
                 new Dimension(Constants.BASE_WIDTH * scale, Constants.BASE_HEIGTH * scale));
-        repaint();
+        //repaint();
     }
     
 }

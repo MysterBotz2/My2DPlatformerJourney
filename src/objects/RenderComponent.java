@@ -8,21 +8,22 @@ package objects;
  *
  * @author MysterBotz
  */
-public abstract class Entity {
+public class RenderComponent {
     
-    protected int posX;
-    protected int posY;
-    protected int width;
-    protected int heigth;
-
-    public Entity(int posX, int posY, int width, int heigth) {
+    public int posX;
+    public int posY;
+    public int width;
+    public int heigth;
+    
+    
+    public void updateComp(int posX, int posY, int width, int heigth)
+    {
         this.posX = posX;
         this.posY = posY;
         this.width = width;
         this.heigth = heigth;
     }
-
-
+    
     
     
     
