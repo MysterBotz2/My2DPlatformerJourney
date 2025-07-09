@@ -5,6 +5,7 @@
 package main;
 
 import graphics.Renderer;
+import inputs.KeyInput;
 import objects.Player;
 import objects.PlayerService;
 
@@ -18,15 +19,20 @@ public class Game implements Runnable{
      Renderer ren;
      
      Player player;
+     KeyInput key;
     
     public Game(Window win)
     {
+        this.player = new Player();
+        PlayerService.registerPlayer(this.player);
+        this.key = new KeyInput(PlayerService.getRegPlayer());
+        
         this.win = win;
         this.ren = win.getRenderer();
-        this.player = new Player();
+        this.ren.getKeyInput(key);
         
         //Test PlayerService
-        PlayerService.registerPlayer(this.player);
+        
     }
 
     @Override
@@ -72,8 +78,7 @@ public class Game implements Runnable{
             if((System.currentTimeMillis() - lastCheck) >= 1000)
             {
                 lastCheck = System.currentTimeMillis();
-                //System.out.println("FPS: " + fpsCount + " | UPS: " + upsCount);
-                ren.changeX(3);
+                System.out.println("FPS: " + fpsCount + " | UPS: " + upsCount);
                 fpsCount = 0;
                 upsCount = 0;
             }

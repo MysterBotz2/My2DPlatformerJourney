@@ -6,6 +6,7 @@ package graphics;
 
 import javax.swing.JPanel;
 import config.Constants;
+import inputs.KeyInput;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -17,12 +18,19 @@ import java.awt.Graphics2D;
 public class Renderer extends JPanel{
     
     private int scale = 3;
-    private int x = 120;
+
+    KeyInput key;
     
     public Renderer()
     {
         this.setPreferredSize(
                 new Dimension(Constants.BASE_WIDTH * scale, Constants.BASE_HEIGTH * scale));
+        this.setFocusable(true);
+    }
+    
+    public void getKeyInput(KeyInput key)
+    {
+        this.key = key;
     }
     
     @Override
@@ -31,7 +39,7 @@ public class Renderer extends JPanel{
         super.paintComponent(g);
         
         Graphics2D g2 = (Graphics2D)g;
-        g2.drawRect(x*scale, 88*scale, Constants.TILE_SIZE * scale, Constants.TILE_SIZE * scale);
+        
     }
     
     public void setScale(int scale)
@@ -40,11 +48,6 @@ public class Renderer extends JPanel{
         this.setPreferredSize(
                 new Dimension(Constants.BASE_WIDTH * scale, Constants.BASE_HEIGTH * scale));
         repaint();
-    }
-    
-    public void changeX(int x)
-    {
-        this.x += x;
     }
     
 }

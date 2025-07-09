@@ -22,10 +22,7 @@ public class Main {
         Thread gameThread = new Thread(game);
         gameThread.start();
         
-        Scanner sc = new Scanner(System.in);
-        System.out.print("ENTER SCALE: ");
-        int x = sc.nextInt();
-        win.changeScale(x);
+
     }
     
 }

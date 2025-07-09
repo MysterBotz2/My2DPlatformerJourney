@@ -6,12 +6,20 @@ package inputs;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import objects.Player;
 
 /**
  *
  * @author MysterBotz
  */
 public class KeyInput implements KeyListener{
+    
+    Player player;
+    
+    public KeyInput(Player player)
+    {
+        this.player = player;
+    }
 
     @Override
     public void keyTyped(KeyEvent e) {
